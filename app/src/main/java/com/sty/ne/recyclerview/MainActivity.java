@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -32,11 +34,17 @@ public class MainActivity extends AppCompatActivity {
         mSuspensionTv = findViewById(R.id.tv_nickname);
         mSuspensionIv = findViewById(R.id.iv_avatar);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         mRecyclerView = findViewById(R.id.recycler_view);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
         mFeedAdapter = new FeedAdapter();
         mRecyclerView.setAdapter(mFeedAdapter);
+        //确定Item的改变不会影响RecyclerView的宽高的时候可以设置setHasFixedSize(true)，
+        //并通过Adapter的增删改插方法去刷新RecyclerView，而不是通过notifyDataSetChanged()。
+        //（其实可以直接设置为true，当需要改变宽高的时候就用notifyDataSetChanged()去整体刷新一下
         mRecyclerView.setHasFixedSize(true);
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -45,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 super.onScrollStateChanged(recyclerView, newState);
                 //获取悬浮条高度
                 mSuspensionHeight = mSuspensionBar.getHeight();
+                Log.i("sty", "onScrollStateChanged: mSuspensionHeight ->" + mSuspensionHeight );
             }
 
             @Override
@@ -53,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 //对悬浮条的位置进行调整
                 //找到下一个itemView
                 View view = layoutManager.findViewByPosition(mCurrentPosition + 1);
+                Log.i("sty", "onScrollStateChanged: view.getTop() ->" + view.getTop() + " (currentPosition: " + mCurrentPosition + ")");
                 if(view != null) {
                     if(view.getTop() <= mSuspensionHeight) {
                         //需要对悬浮条进行移动
@@ -79,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 .centerInside()
                 .fit()
                 .into(mSuspensionIv);
-        mSuspensionTv.setText("NeEase " + mCurrentPosition);
+        mSuspensionTv.setText("Float Title " + mCurrentPosition);
     }
 
     private int getAvatarResId(int position) {

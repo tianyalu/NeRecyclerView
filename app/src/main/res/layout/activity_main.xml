@@ -10,6 +10,12 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <!-- AppBarLayout的直接子控件可以设置的属性:layout_scrollFlags(滚动模式) -->
+        <!-- 1.scroll|exitUntilCollapsed:如果AppBarLayout的直接子控件设置该属性,该子控件可以滚动,向上滚动NestedScrollView出父布局(一般为CoordinatorLayout)时,会折叠到顶端,向下滚动时NestedScrollView必须滚动到最上面的时候才能拉出该布局
+             2.scroll|enterAlways:只要向下滚动该布局就会显示出来,只要向上滑动该布局就会向上收缩
+             3.scroll|enterAlwaysCollapsed:向下滚动NestedScrollView到最底端时该布局才会显示出来
+             4.scroll|snap:表示一个吸附效果，可以确保childView不会滑动停止在中间的状态
+             5.如果不设置该属性,则该布局不能滑动 -->
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
