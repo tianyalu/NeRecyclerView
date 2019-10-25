@@ -11,4 +11,4 @@ Behavior是Android Support Design库里面新增的布局概念，主要的作�
 里面直接Child Views之间交互行为的.特别要注意的点是Behavior只能作用于CoordinatorLayout的直接Child View.  
 参考：[Android CoordinatorLayout Behavior](https://www.jianshu.com/p/4ebb7bfa1228)
 ### 示例效果如下图所示：  
-![image](https://github.com/tianyalu/NeRecyclerView/blob/master/show/show.gif)
+![image](https://github.com/tianyalu/NeRecyclerView/blob/master/show/show_gif.gif)
