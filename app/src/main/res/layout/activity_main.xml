@@ -67,5 +67,16 @@
                 android:background="#33000000"/>
         </RelativeLayout>
     </FrameLayout>
+    
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fb_back_top"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="16dp"
+        android:layout_gravity="bottom|right"
+        app:layout_behavior="com.sty.ne.recyclerview.ScaleBehavior">
+        <!--原生behavior: 上滑隐藏，下拉显示-->
+        <!--app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior">-->
 
+    </android.support.design.widget.FloatingActionButton>
 </android.support.design.widget.CoordinatorLayout>

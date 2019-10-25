@@ -1,6 +1,7 @@
 package com.sty.ne.recyclerview;
 
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     private RelativeLayout mSuspensionBar;
     private TextView mSuspensionTv;
     private ImageView mSuspensionIv;
+    private FloatingActionButton fbBackTop;
+
 
     private int mSuspensionHeight;
     private int mCurrentPosition;
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         mSuspensionBar = findViewById(R.id.suspension_bar);
         mSuspensionTv = findViewById(R.id.tv_nickname);
         mSuspensionIv = findViewById(R.id.iv_avatar);
+        fbBackTop = findViewById(R.id.fb_back_top);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -62,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
                 //对悬浮条的位置进行调整
                 //找到下一个itemView
                 View view = layoutManager.findViewByPosition(mCurrentPosition + 1);
-                Log.i("sty", "onScrollStateChanged: view.getTop() ->" + view.getTop() + " (currentPosition: " + mCurrentPosition + ")");
                 if(view != null) {
+                    Log.i("sty", "onScrollStateChanged: view.getTop() ->" + view.getTop() + " (currentPosition: " + mCurrentPosition + ")");
                     if(view.getTop() <= mSuspensionHeight) {
                         //需要对悬浮条进行移动
                         mSuspensionBar.setY(-(mSuspensionHeight - view.getTop()));
@@ -81,6 +85,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
         updateSuspensionBar();
+
+        fbBackTop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mRecyclerView != null) {
+//                    mRecyclerView.scrollToPosition(0);
+                    mRecyclerView.smoothScrollToPosition(0);
+                }
+            }
+        });
     }
 
     private void updateSuspensionBar() {
